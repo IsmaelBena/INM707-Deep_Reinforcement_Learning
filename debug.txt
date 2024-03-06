@@ -1,0 +1,680 @@
+
+from state: 0
+[ 0.  0. nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 1
+[ 0.  0.  0. nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 2
+[nan  0.  0.  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 3
+[nan nan  0.  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan  0. nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 4
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 5
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 6
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 7
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 8
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 9
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 10
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 11
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 12
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 13
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 14
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 15
+[nan nan nan  0. nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 16
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[  0. -30.  nan  nan  nan  nan  nan  nan]
+[ 0. nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 17
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[  0. -30.  nan  nan  nan  nan  nan  nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 18
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 19
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0.  0. nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 20
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0.  0.  0. nan nan]
+[nan nan nan nan  0. nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 21
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan  0.  0.  0. nan]
+[nan nan nan nan nan  0. nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 22
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan  0.  0.  0.]
+[nan nan nan nan nan nan  0. nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 23
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan  0.  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][100.]
+
+from state: 24
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 25
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 26
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 27
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0.  0. nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 28
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan  0. nan nan nan]
+[nan nan nan  0.  0.  0. nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 29
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan  0. nan nan]
+[nan nan nan nan  0.  0.  0. nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 30
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan  0. nan]
+[nan nan nan nan nan  0.  0.  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][100.]
+
+from state: 31
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan  0.  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][100.]
+
+from state: 32
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[ 0.  0. nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 33
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0.  0.  0. nan nan nan nan nan]
+[nan  0. nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 34
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan  0.  0.  0. nan nan nan nan]
+[nan nan  0. nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 35
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan  0.  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 36
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 37
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 38
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 39
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][100.]
+
+from state: 40
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[ 0.  0. nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 41
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan  0. nan nan nan nan nan nan]
+[ 0.  0.  0. nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan][nan nan nan][nan]
+
+from state: 42
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan  0. nan nan nan nan nan]
+[nan  0.  0.  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 43
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan  0.  0.  0. nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 44
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0.  0.  0. nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 45
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ nan  nan  nan  nan   0.   0. -30.  nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 46
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ nan  nan  nan  nan  nan   0. -30.   0.]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 47
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[ nan  nan  nan  nan  nan  nan -30.   0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 48
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[-30.  nan  nan   0.  nan  nan  nan  nan][nan nan nan][nan]
+
+from state: 49
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 50
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 51
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0. nan nan nan nan][nan nan nan][nan]
+
+from state: 52
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 53
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 54
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 55
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan nan  0.][nan nan nan][nan]
+
+from state: 56
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[-30.  nan  nan  nan  nan  nan  nan  nan][nan nan nan][nan]
+
+from state: 57
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 58
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 59
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan  0. nan nan nan nan nan nan]
+[nan nan nan  0. nan nan nan nan]
+[nan nan nan  0.  0. nan nan nan][nan nan nan][nan]
+
+from state: 60
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan  0.  0.  0. nan nan][nan nan nan][nan]
+
+from state: 61
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan  0.  0.  0. nan][nan nan nan][nan]
+
+from state: 62
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan  0.  0.  0.][nan nan nan][nan]
+
+from state: 63
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan  0.]
+[nan nan nan nan nan nan  0.  0.][nan nan nan][nan]
+
+from state: 64
+[50.  0. nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 65
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[50.  0. nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 66
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[ nan  nan  nan  nan   0.  50. -30.  nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+
+from state: 67
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan]
+[nan nan nan nan nan nan nan nan][nan nan nan][nan]
