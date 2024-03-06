@@ -22,13 +22,12 @@ env = Environment(grid_x, grid_y, diamond_collected_reward, corrosive_fume_rewar
 
 agent = Agent(alpha, gamma, epsilon, env.R)
 
-for episode in range(1000):
+for episode in range(10):
     print(f'Starting Episode {episode}:')
     agent.set_position(env.start_state)
     
     for timestep in range(500000):
         agent.take_action(env.get_valid_actions(agent.current_state))
-        agent.update_q()
         env.check_diamond_mined(agent.current_state, agent.prev_state)
 
         if env.check_terminal(agent.current_state):

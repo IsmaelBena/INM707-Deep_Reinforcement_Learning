@@ -17,7 +17,7 @@ from state: 1
 [nan nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
-[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+[nan nan nan nan nan nan nan nan][ 0. nan nan][nan]
 
 from state: 2
 [nan  0.  0.  0. nan nan nan nan]
@@ -327,7 +327,7 @@ from state: 32
 [ 0.  0. nan nan nan nan nan nan]
 [ 0. nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
-[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+[nan nan nan nan nan nan nan nan][nan  0. nan][nan]
 
 from state: 33
 [nan nan nan nan nan nan nan nan]
@@ -417,7 +417,7 @@ from state: 41
 [nan  0. nan nan nan nan nan nan]
 [ 0.  0.  0. nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
-[nan nan nan  0. nan nan nan nan][nan nan nan][nan]
+[nan nan nan  0. nan nan nan nan][nan  0. nan][nan]
 
 from state: 42
 [nan nan nan nan nan nan nan nan]
@@ -447,7 +447,7 @@ from state: 44
 [nan nan nan nan nan nan nan nan]
 [nan nan nan  0.  0.  0. nan nan]
 [nan nan nan nan nan nan nan nan]
-[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+[nan nan nan nan nan nan nan nan][nan nan  0.][nan]
 
 from state: 45
 [nan nan nan nan nan nan nan nan]
@@ -467,7 +467,7 @@ from state: 46
 [nan nan nan nan nan nan nan nan]
 [ nan  nan  nan  nan  nan   0. -30.   0.]
 [nan nan nan nan nan nan nan nan]
-[nan nan nan nan nan nan nan nan][nan nan nan][nan]
+[nan nan nan nan nan nan nan nan][nan nan  0.][nan]
 
 from state: 47
 [nan nan nan nan nan nan nan nan]
@@ -487,7 +487,7 @@ from state: 48
 [nan nan nan nan nan nan nan nan]
 [ 0. nan nan nan nan nan nan nan]
 [ 0. nan nan nan nan nan nan nan]
-[-30.  nan  nan   0.  nan  nan  nan  nan][nan nan nan][nan]
+[-30.  nan  nan   0.  nan  nan  nan  nan][nan  0. nan][nan]
 
 from state: 49
 [nan nan nan nan nan nan nan nan]
@@ -654,7 +654,7 @@ from state: 65
 [nan nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan]
-[ 0. nan nan nan nan nan nan nan]
+[ 0. nan nan nan nan nan nan  0.]
 [50.  0. nan nan nan nan nan nan]
 [ 0. nan nan nan nan nan nan nan]
 [nan nan nan nan nan nan nan nan][nan nan nan][nan]

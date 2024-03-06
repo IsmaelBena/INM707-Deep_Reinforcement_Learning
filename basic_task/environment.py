@@ -83,9 +83,10 @@ class Environment():
 
     def check_legal(self, state, change):
         new_state = state + change
-        if state == self.amount_of_grid_states + len(self.diamond_ore_states):
-            return state
-        elif (new_state < 0) or (new_state > self.amount_of_grid_states-1):
+        if state >= self.amount_of_grid_states and state < self.amount_of_grid_states + len(self.diamond_ore_states):
+            new_state = self.diamond_ore_states[state - self.amount_of_grid_states] + change
+
+        if (new_state < 0) or (new_state > self.amount_of_grid_states-1):
             return state
         elif (change == -1 and state % self.grid_x == 0) or (change == 1 and state % self.grid_x == (self.grid_x - 1)):
             return state
@@ -95,19 +96,12 @@ class Environment():
             return new_state
 
     def check_ore(self, state):
-        if state >= self.amount_of_grid_states and state < self.amount_of_grid_states + len(self.diamond_ore_states):
+        if state in self.diamond_ore_states:
             return [state, self.amount_of_grid_states + self.diamond_ore_states.index(state)]
         else:
             return state
 
     def mine_action_map(self, state):
-        if state >= self.amount_of_grid_states and state < self.amount_of_grid_states + len(self.diamond_ore_states):
-            ind = state - self.amount_of_grid_states
-            return self.diamond_ore_states[ind]
-        else:
-            return state
-
-    def mine_map(self, state):
         if state >= self.amount_of_grid_states and state < self.amount_of_grid_states + len(self.diamond_ore_states):
             ind = state - self.amount_of_grid_states
             return self.diamond_ore_states[ind]
@@ -130,33 +124,35 @@ class Environment():
     def generate_init_r_matrix(self, nan_r):
         # 0 = up, 1 = right, 2 = down, 3 = left, 4 = mine
         for state in self.all_states:
+            if state == self.amount_of_grid_states + len(self.diamond_ore_states):
+                continue
             if (state not in self.wall_rail_states):
                 if state not in self.rail_starts:
                     for action in self.all_actions:
                         match action:
                             case 0:
-                                border_check = self.check_legal(self.mine_map(state), -self.grid_x)
+                                border_check = self.check_legal(state, -self.grid_x)
                                 if border_check != state:
                                     rail_check = self.check_rails(border_check)
                                     new_states = self.check_ore(rail_check)
                                 else:
                                     new_states = border_check
                             case 1:
-                                border_check = self.check_legal(self.mine_map(state), 1)
+                                border_check = self.check_legal(state, 1)
                                 if border_check != state:
                                     rail_check = self.check_rails(border_check)
                                     new_states = self.check_ore(rail_check)
                                 else:
                                     new_states = border_check
                             case 2:
-                                border_check = self.check_legal(self.mine_map(state), self.grid_x)
+                                border_check = self.check_legal(state, self.grid_x)
                                 if border_check != state:
                                     rail_check = self.check_rails(border_check)
                                     new_states = self.check_ore(rail_check)
                                 else:
                                     new_states = border_check
                             case 3:
-                                border_check = self.check_legal(self.mine_map(state), -1)
+                                border_check = self.check_legal(state, -1)
                                 if border_check != state:
                                     rail_check = self.check_rails(border_check)
                                     new_states = self.check_ore(rail_check)
@@ -211,28 +207,31 @@ class Environment():
         #print(f'valid actions {valid_actions}')
         for index, diamond_ore in enumerate(self.diamond_ore_states):
             if diamond_ore in valid_actions:
+                #print(f'diamond ore {index} at {diamond_ore} status: {self.diamonds_collected[index]}')
                 if self.diamonds_collected[index]:
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states + index))
+                    #print(f'actions: {valid_actions}\nRemoving: {self.amount_of_grid_states + index}')
                 else:
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == diamond_ore))
+                    #print(f'actions: {valid_actions}\nRemoving: {diamond_ore}')
+
         if self.start_state in valid_actions:
             if False in self.diamonds_collected:
                 valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states+len(self.diamond_ore_pos)))
             else:
                 valid_actions = np.delete(valid_actions, np.where(valid_actions == self.start_state))
 
-        
         return valid_actions
 
     def check_diamond_mined(self, agent_current_state, agent_prev_state):
-        # print(f'from {agent_prev_state} to {agent_current_state}')
+        #print(f'from {agent_prev_state} to {agent_current_state}')
         if (agent_current_state in self.diamond_ore_states) and (agent_prev_state == self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)):
-            self.diamonds_collected[self.diamond_ore_states.index(agent_prev_state)] = True
-            print('Diamond Mined')
-        elif agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45:
-            print('empty ore deposit?')
-        elif agent_current_state == 64 or agent_current_state == 65 or agent_current_state == 66:
-            print('not mining :)')
+            self.diamonds_collected[self.diamond_ore_states.index(agent_current_state)] = True
+        #     print('Diamond Mined')
+        # elif agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45:
+        #     print('empty ore deposit?')
+        # elif agent_current_state == 64 or agent_current_state == 65 or agent_current_state == 66:
+        #     print('not mining :)')
 
     def check_terminal(self, state):
         if state == self.amount_of_grid_states + len(self.diamond_ore_states):
