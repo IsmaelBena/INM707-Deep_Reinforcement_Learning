@@ -10,6 +10,10 @@ class Environment():
             start_exit_pos, wall_rail_pos, diamond_ore_pos, corrosive_fumes_pos,
             rails_mapping_pos):
 
+        ####################### Debugging
+        #self.moved_off_mine = 0
+
+
         # env design params
         self.grid_x = grid_x
         self.grid_y = grid_y
@@ -209,11 +213,15 @@ class Environment():
             if diamond_ore in valid_actions:
                 #print(f'diamond ore {index} at {diamond_ore} status: {self.diamonds_collected[index]}')
                 if self.diamonds_collected[index]:
+                    #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {self.amount_of_grid_states + index}')
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states + index))
-                    #print(f'actions: {valid_actions}\nRemoving: {self.amount_of_grid_states + index}')
+                    #print(f'After removing: {valid_actions}')
+                elif current_state > self.amount_of_grid_states and current_state < self.amount_of_grid_states + len(self.diamond_ore_states):
+                    continue
                 else:
+                    #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {diamond_ore}')
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == diamond_ore))
-                    #print(f'actions: {valid_actions}\nRemoving: {diamond_ore}')
+                    #print(f'After removing: {valid_actions}')
 
         if self.start_state in valid_actions:
             if False in self.diamonds_collected:
@@ -227,11 +235,15 @@ class Environment():
         #print(f'from {agent_prev_state} to {agent_current_state}')
         if (agent_current_state in self.diamond_ore_states) and (agent_prev_state == self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)):
             self.diamonds_collected[self.diamond_ore_states.index(agent_current_state)] = True
+            print(f'Diamonds mined: {self.diamonds_collected}')
         #     print('Diamond Mined')
         # elif agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45:
         #     print('empty ore deposit?')
-        # elif agent_current_state == 64 or agent_current_state == 65 or agent_current_state == 66:
-        #     print('not mining :)')
+        # elif agent_prev_state == 64 or agent_prev_state == 65 or agent_prev_state == 66:
+        #     self.moved_off_mine += 1
+
+        #if (agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45) and (agent_prev_state == 64 or agent_prev_state == 65 or agent_prev_state == 66):
+            #print('mining not check properly')
 
     def check_terminal(self, state):
         if state == self.amount_of_grid_states + len(self.diamond_ore_states):

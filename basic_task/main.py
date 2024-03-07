@@ -16,14 +16,15 @@ rails_mapping_pos = [[[6, 1], [3, 0]], [[4, 0], [6, 2]], [[2, 7], [1, 5]], [[1, 
 
 alpha = 1
 gamma = 0.8
-epsilon = 0.1
+epsilon = 0.5
 
 env = Environment(grid_x, grid_y, diamond_collected_reward, corrosive_fume_reward, exit_reward, start_exit_pos, wall_rail_pos, diamond_ore_pos, corrosive_fumes_pos, rails_mapping_pos)
 
 agent = Agent(alpha, gamma, epsilon, env.R)
 
-for episode in range(10):
+for episode in range(100):
     print(f'Starting Episode {episode}:')
+    env.reset_env()
     agent.set_position(env.start_state)
     
     for timestep in range(500000):
@@ -32,6 +33,10 @@ for episode in range(10):
 
         if env.check_terminal(agent.current_state):
             break
+
+        agent.update_q()
+    
+    #print(env.moved_off_mine)
     
     #print(f'Episode {episode} finished with Q value: \n{agent.Q.round(1)}')
 

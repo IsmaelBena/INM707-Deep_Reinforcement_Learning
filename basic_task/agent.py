@@ -42,7 +42,11 @@ class Agent():
         #print(f'from {self.prev_state} to {self.current_state}')
 
     def update_q(self):
+        #print(f'updates:\n - prevstate: {self.prev_state}\n - actiontaken: {self.action_taken}\n -maxselfq: {np.max(self.Q[self.current_state])}')
+
         self.Q[self.prev_state, self.action_taken] = self.Q[self.prev_state, self.action_taken] + (self.alpha * self.R[self.prev_state, self.action_taken] + (self.gamma * np.max(self.Q[self.current_state])) - self.Q[self.prev_state, self.action_taken])
+        # if self.prev_state == 64 or self.prev_state == 65 or self.prev_state == 66:
+        #     print(f'{self.Q[self.prev_state, self.action_taken]}')
 
     def set_position(self, state):
         self.current_state = state
