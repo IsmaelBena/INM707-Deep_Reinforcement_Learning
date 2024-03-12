@@ -21,7 +21,9 @@ class Agent():
         self.current_state = None
         self.prev_state = None
 
-    def take_action(self, valid_actions):
+        self.position = [None, None]
+
+    def epsilon_greedy(self, valid_actions):
         
         self.valid_a = valid_actions
         # print(valid_actions)
@@ -43,6 +45,16 @@ class Agent():
 
         #print(f'from {self.prev_state} to {self.current_state}')
 
+    def epsilon_test(self, valid_actions):
+        self.valid_a = valid_actions
+        q_values = [self.Q[self.current_state, action] for action in valid_actions]
+        best_actions = valid_actions[np.where(q_values == np.max(q_values))[0]]
+
+        self.action_taken = np.random.choice(best_actions)
+        
+        self.prev_state = self.current_state
+        self.current_state = self.action_taken
+
     def update_q(self):
         #if self.prev_state == 64:
         #    print(f'updates:\n - prevstate: {self.prev_state}\n - actiontaken: {self.action_taken}\n -validactions: {self.valid_a}')
@@ -51,5 +63,8 @@ class Agent():
         # if self.prev_state == 64 or self.prev_state == 65 or self.prev_state == 66:
         #     print(f'{self.Q[self.prev_state, self.action_taken]}')
 
-    def set_position(self, state):
+    def set_state(self, state):
         self.current_state = state
+
+    def set_position(self, pos):
+        self.position = pos

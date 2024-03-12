@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+from math import floor
 
 np.set_printoptions(threshold=sys.maxsize)
 
@@ -84,6 +85,13 @@ class Environment():
             return res[0]
         else:
             return res
+        
+    def convert_state_to_pos(self, state):
+        position = [None, None]
+        position[0] = floor(state/self.grid_x)
+        position[1] = state % self.grid_x
+        
+        return position
 
     def check_legal(self, temp_state, change):
         
@@ -259,3 +267,34 @@ class Environment():
 
     def reset_env(self):
         self.diamonds_collected = [False, False, False]
+
+
+
+    def get_grid(self, agent_pos):
+        empty_grid = np.zeros((self.grid_x, self.grid_y))
+        print(empty_grid)
+
+        for wall_rail in self.wall_rail_pos:
+            empty_grid[wall_rail[1], wall_rail[0]] += -5
+
+        for rail_start_state in self.rail_starts:
+            rail_start = self.convert_state_to_pos(rail_start_state)
+            empty_grid[rail_start[0], rail_start[1]] += 5
+
+        for fumes in self.corrosive_fumes_pos:
+            empty_grid[fumes[1], fumes[0]] += -30
+
+        for index, diamond in enumerate(self.diamond_ore_pos):
+            if self.diamonds_collected[index]:
+                continue
+            else:
+                empty_grid[diamond[1], diamond[0]] += 50
+
+        if False not in self.diamonds_collected:
+            empty_grid[self.start_exit_pos[1], self.start_exit_pos[0]] += 100
+        
+        empty_grid[agent_pos[0], agent_pos[1]] += 1000
+
+        print(empty_grid)
+
+        return empty_grid

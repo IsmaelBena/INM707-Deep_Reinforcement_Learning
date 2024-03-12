@@ -1,4 +1,6 @@
 import numpy as np
+import matplotlib as mpl
+from matplotlib import pyplot
 
 from environment import Environment
 from agent import Agent
@@ -22,13 +24,36 @@ env = Environment(grid_x, grid_y, diamond_collected_reward, corrosive_fume_rewar
 
 agent = Agent(alpha, gamma, epsilon, env.R)
 
-for episode in range(100):
+
+########################## Visualisation
+# Black = Agent                       1000
+# Brown = Walls                       -5
+# Blue = Diamonds                     50
+# Purple = Fumes                      -30
+# Red = Rails                         5
+# White = Empty Tiles                 0
+# Yellow = Terminal                   100
+
+def plotState(grid):
+    bounds = [-31, -6, -1, 1, 6, 51, 101, 1001]
+    cmap = mpl.colors.ListedColormap(['purple','brown','white', 'red', 'blue', 'yellow', 'black'])
+    norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+
+    img = pyplot.imshow(grid, interpolation='nearest', cmap = cmap,norm=norm)
+
+    # make a color bar
+    pyplot.colorbar(img,cmap=cmap, norm=norm, boundaries=bounds,ticks=[-5,0,5])
+    pyplot.show()
+
+
+for episode in range(1):
     print(f'Starting Episode {episode}:')
     env.reset_env()
-    agent.set_position(env.start_state)
+    agent.set_state(env.start_state)
     
     for timestep in range(10000):
-        agent.take_action(env.get_valid_actions(agent.current_state))
+        agent.epsilon_greedy(env.get_valid_actions(agent.current_state))
+        #agent.set_position(env.convert_state_to_pos(agent.current_state))
         env.check_diamond_mined(agent.current_state, agent.prev_state)
 
         if env.check_terminal(agent.current_state):
@@ -42,6 +67,21 @@ for episode in range(100):
     #print(f'Episode {episode} finished with Q value: \n{agent.Q.round(1)}')
 
 # print(f'Final Q Matrix: \n {agent.Q.round(1)}')
+
+
+print(f'Starting Test:')
+env.reset_env()
+agent.set_state(env.start_state)
+while True:
+    agent.epsilon_test(env.get_valid_actions(agent.current_state))
+    agent.set_position(env.convert_state_to_pos(agent.current_state))
+    env.check_diamond_mined(agent.current_state, agent.prev_state)
+
+    if env.check_terminal(agent.current_state):
+        print("Terminal Reached")
+        break
+    
+    plotState(env.get_grid(agent.position))
 
 f = open('training_debug.txt', 'w')
 
