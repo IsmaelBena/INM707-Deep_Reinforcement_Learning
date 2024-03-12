@@ -274,6 +274,17 @@ class Environment():
         empty_grid = np.zeros((self.grid_x, self.grid_y))
         print(empty_grid)
 
+        print(agent_pos)
+
+        if agent_pos[0] > self.grid_x - 1:
+            print("mine")
+            agent_pos[0] = agent_pos[0] - self.grid_x
+            print(agent_pos)
+        
+        elif agent_pos[1] > self.grid_y - 1:
+            print("mine y")
+            agent_pos[1] = agent_pos[1] - self.grid_y
+
         for wall_rail in self.wall_rail_pos:
             empty_grid[wall_rail[1], wall_rail[0]] += -5
 

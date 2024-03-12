@@ -50,6 +50,8 @@ class Agent():
         q_values = [self.Q[self.current_state, action] for action in valid_actions]
         best_actions = valid_actions[np.where(q_values == np.max(q_values))[0]]
 
+        #print(best_actions)
+
         self.action_taken = np.random.choice(best_actions)
         
         self.prev_state = self.current_state
