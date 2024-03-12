@@ -16,7 +16,7 @@ rails_mapping_pos = [[[6, 1], [3, 0]], [[4, 0], [6, 2]], [[2, 7], [1, 5]], [[1, 
 
 alpha = 1
 gamma = 0.8
-epsilon = 0.5
+epsilon = 0.2
 
 env = Environment(grid_x, grid_y, diamond_collected_reward, corrosive_fume_reward, exit_reward, start_exit_pos, wall_rail_pos, diamond_ore_pos, corrosive_fumes_pos, rails_mapping_pos)
 
@@ -27,11 +27,12 @@ for episode in range(100):
     env.reset_env()
     agent.set_position(env.start_state)
     
-    for timestep in range(500000):
+    for timestep in range(10000):
         agent.take_action(env.get_valid_actions(agent.current_state))
         env.check_diamond_mined(agent.current_state, agent.prev_state)
 
         if env.check_terminal(agent.current_state):
+            print("Terminal Reached")
             break
 
         agent.update_q()

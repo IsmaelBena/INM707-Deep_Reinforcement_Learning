@@ -85,7 +85,13 @@ class Environment():
         else:
             return res
 
-    def check_legal(self, state, change):
+    def check_legal(self, temp_state, change):
+        
+        if temp_state > self.amount_of_grid_states - 1:
+            state = self.diamond_ore_states[temp_state - self.amount_of_grid_states]
+        else:
+            state = temp_state
+            
         new_state = state + change
         if state >= self.amount_of_grid_states and state < self.amount_of_grid_states + len(self.diamond_ore_states):
             new_state = self.diamond_ore_states[state - self.amount_of_grid_states] + change
@@ -216,7 +222,7 @@ class Environment():
                     #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {self.amount_of_grid_states + index}')
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states + index))
                     #print(f'After removing: {valid_actions}')
-                elif current_state > self.amount_of_grid_states and current_state < self.amount_of_grid_states + len(self.diamond_ore_states):
+                elif current_state > self.amount_of_grid_states-1 and current_state < self.amount_of_grid_states + len(self.diamond_ore_states):
                     continue
                 else:
                     #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {diamond_ore}')
@@ -235,7 +241,7 @@ class Environment():
         #print(f'from {agent_prev_state} to {agent_current_state}')
         if (agent_current_state in self.diamond_ore_states) and (agent_prev_state == self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)):
             self.diamonds_collected[self.diamond_ore_states.index(agent_current_state)] = True
-            print(f'Diamonds mined: {self.diamonds_collected}')
+        #    print(f'Diamonds mined: {self.diamonds_collected}')
         #     print('Diamond Mined')
         # elif agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45:
         #     print('empty ore deposit?')
