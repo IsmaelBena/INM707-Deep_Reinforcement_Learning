@@ -13,10 +13,12 @@ import copy
 
 
 class Agent():
-    def __init__(self, alpha, gamma, epsilon, R):
+    def __init__(self, alpha, gamma, epsilon, decay, R, name):
+        self.name = name
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
+        self.decay = decay
         self.R = copy.deepcopy(R)
         self.Q = np.zeros(np.array(R).shape)
         self.prime_state = 0
@@ -41,6 +43,7 @@ class Agent():
         else:
             self.action_taken = np.random.choice(best_actions)
             
+        self.epsilon -= self.decay
         #print(f'action taken {self.action_taken}')
 
         reward = self.R[self.prime_state][self.current_state, self.action_taken]

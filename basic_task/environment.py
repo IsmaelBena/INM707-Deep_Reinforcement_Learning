@@ -44,7 +44,9 @@ class Environment():
             self.rail_starts.append(rail_start[0])
 
 
-        self.diamonds_collected = [False, False, False]
+        self.diamonds_collected = []
+        for i in range(len(self.diamond_ore_states)):
+            self.diamonds_collected.append(False)
 
         self.prime_states = []
         self.prime_states = self.generate_prime_state()
