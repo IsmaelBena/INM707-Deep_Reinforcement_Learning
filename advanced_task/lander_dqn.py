@@ -246,7 +246,7 @@ class Trainer():
         plt.show()
         
 
-class Test_agent():
+class Tester():
     def __init__(self, agent, env):
         self.agent = agent
         self.env = env
@@ -254,6 +254,7 @@ class Test_agent():
     def test(self):
         self.agent.online_network.eval()
         state, info = self.env.reset()
+        state = torch.tensor(state, dtype=torch.float32, device=device).unsqueeze(0)
         for t in count():
             action = self.agent.greedy_action(state).item()
             observation, reward, terminated, truncated, _ = self.env.step(action)
@@ -261,6 +262,7 @@ class Test_agent():
             if done:
                 print(f'agent took {t} step to land')
                 break
+            state = torch.tensor(observation, dtype=torch.float32, device=device).unsqueeze(0)
 
 # ================================================================================= Training Function
 
@@ -293,7 +295,7 @@ env = env = gym.make("LunarLander-v2",
     enable_wind= False,
     wind_power = 0.0,
     turbulence_power = 1.5,
-    render_mode = "human"
+    render_mode= "human"
 )
 
 state, info = env.reset()
@@ -301,8 +303,14 @@ state, info = env.reset()
 n_observations = len(state)
 n_actions = env.action_space.n
 
-agent = DQN_Agent("testing_dqn_agent", n_observations, n_actions, False, 10000, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR)
-optimizer = optim.AdamW(agent.online_network.parameters(), lr=LR, amsgrad=True)
-trainer = Trainer(agent, env, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR, optimizer, plot_results=True, seed=False)
+# agent = DQN_Agent("double_dqn_agent_1kep", n_observations, n_actions, True, 10000, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR)
 
-trainer.train(num_episodes = 5)
+agent = load_agent(os.path.join('checkpoints', 'double_dqn_agent_1kep'))
+
+optimizer = optim.AdamW(agent.online_network.parameters(), lr=LR, amsgrad=True)
+
+# trainer = Trainer(agent, env, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR, optimizer, plot_results=True, seed=False)
+# trainer.train(num_episodes = 1000)
+
+tester = Tester(agent, env)
+tester.test()
