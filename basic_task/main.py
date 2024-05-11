@@ -95,7 +95,7 @@ def plot_reward(rewards, name):
 
 def train_agent(alpha, gamma, epsilon, episodes, timesteps):
     name = f'a{alpha}g{gamma}e{epsilon}'.replace('.', '')
-    decay = epsilon/timesteps
+    decay = 0.99999 #epsilon/timesteps
     
     if not os.path.exists(f'./agents/{name}'):
         os.makedirs(f'./agents/{name}')
@@ -220,7 +220,7 @@ epsilon = 0.5
 
 
 episodes = 1000
-timesteps = 10000
+timesteps = 1000
 
 # episodes = 50
 # timesteps = 1000
@@ -264,13 +264,13 @@ def compare_params(run_config, eps, ts):
         epsilon_results[f'reward:{epsilon}'] = ep_train_rewards
         epsilon_results[f'steps:{epsilon}'] = ep_steps
 
-    with open(os.path.join(os.getcwd(), 'results', "alpha_results.json"), 'w') as alpha_results_file:
+    with open(os.path.join(os.getcwd(), 'basic_task/results', "alpha_results.json"), 'w') as alpha_results_file:
         json.dump(alpha_results, alpha_results_file)
 
-    with open(os.path.join(os.getcwd(), 'results', "gamma_results.json"), 'w') as gamma_results_file:
+    with open(os.path.join(os.getcwd(), 'basic_task/results', "gamma_results.json"), 'w') as gamma_results_file:
         json.dump(gamma_results, gamma_results_file)
 
-    with open(os.path.join(os.getcwd(), 'results', "epsilon_results.json"), 'w') as epsilon_results_file:
+    with open(os.path.join(os.getcwd(), 'basic_task/results', "epsilon_results.json"), 'w') as epsilon_results_file:
         json.dump(epsilon_results, epsilon_results_file)
 
 compare_params(run_config, episodes, timesteps)

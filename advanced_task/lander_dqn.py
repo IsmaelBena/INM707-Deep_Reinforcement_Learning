@@ -305,7 +305,7 @@ n_actions = env.action_space.n
 
 # agent = DQN_Agent("double_dqn_agent_1kep", n_observations, n_actions, True, 10000, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR)
 
-agent = load_agent(os.path.join('checkpoints', 'double_dqn_agent_1kep'))
+agent = load_agent(os.path.join('advanced_task/checkpoints', 'double_dqn_agent_1kep'))
 
 optimizer = optim.AdamW(agent.online_network.parameters(), lr=LR, amsgrad=True)
 

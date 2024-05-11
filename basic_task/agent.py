@@ -38,7 +38,7 @@ class Agent():
         best_actions = valid_actions[np.where(q_values == np.max(q_values))[0]]
         best_actions_q_values = [self.Q[self.prime_state][self.current_state, best_action] for best_action in best_actions]
 
-        if np.random.uniform() > self.epsilon:
+        if np.random.uniform() < self.epsilon:
             self.action_taken = np.random.choice(valid_actions)
         else:
             self.action_taken = np.random.choice(best_actions)
