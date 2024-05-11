@@ -5,6 +5,7 @@ import matplotlib.cm as cm
 import matplotlib.animation as animation
 import pickle
 import os
+import json
 
 from environment import Environment
 from agent import Agent
@@ -100,9 +101,9 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
         os.makedirs(f'./agents/{name}')
 
     agent = Agent(alpha, gamma, epsilon, decay, env.R, name)
-    
-    images = []
-    agent_rewards = []
+
+    ep_rewards = []
+    ep_steps = []
 
     for episode in range(episodes):
         print(f'{name} - Starting Episode {episode}:')
@@ -110,7 +111,7 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
 
         agent.set_state(env.start_state)
         agent.total_reward = 0
-        
+
         for timestep in range(timesteps):
             
             agent.epsilon_greedy(env.get_valid_actions(agent.current_state))
@@ -128,7 +129,10 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
                 break
             
             agent.update_q()
-            
+
+        ep_rewards.append(agent.total_reward)
+        ep_steps.append(timestep)
+
         #print(f'Total reward: {agent.total_reward}')
 
         #print(env.moved_off_mine)
@@ -148,6 +152,8 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
 
     with open(f'./agents/{name}/{name}-agent.pkl', 'wb') as file:
         pickle.dump(agent, file)
+
+    return ep_rewards, ep_steps
 
 
 def test_agent(name):
@@ -206,21 +212,65 @@ def test_agent(name):
     #plt.show()
 
 
-# alpha = 0.8
-# gamma = 0.9
-# epsilon = 0.5
+alpha = 0.8
+gamma = 0.9
+epsilon = 0.5
 
 #     name = f'a{alpha}g{gamma}e{epsilon}'.replace('.', '')
 
-alphas = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0]
-gammas = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0]
-epsilons = [1, 0.75, 0.5, 0.25]
 
-episodes = 500
+episodes = 1000
 timesteps = 10000
 
-for alpha in alphas:
-    for gamma in gammas:
-        for epsilon in epsilons:
-            train_agent(alpha, gamma, epsilon, episodes, timesteps)
-            test_agent(f'a{alpha}g{gamma}e{epsilon}'.replace('.', ''))
+# episodes = 50
+# timesteps = 1000
+
+run_config = {
+    "alpha": 0.8,
+    "gamma": 0.9,
+    "epsilon": 0.5,
+    "alphas": [0.9, 0.6, 0.3],
+    "gammas": [0.9, 0.6, 0.3],
+    "epsilons": [0.9, 0.6, 0.3]
+}
+
+# run_config = {
+#     "alphas": [0.5, 0.2],
+#     "gammas": [0.8, 0.5],
+#     "epsilon_decays": [0.999, 0.91]
+# }
+
+# train_agent(alpha, gamma, epsilon, episodes, timesteps)
+# test_agent(f'a{alpha}g{gamma}e{epsilon}'.replace('.', ''))
+
+
+def compare_params(run_config, eps, ts):
+    alpha_results = {}
+    gamma_results = {}
+    epsilon_results = {}
+
+    for alpha in run_config['alphas']:
+        ep_train_rewards, ep_steps = train_agent(alpha, run_config["gamma"], run_config["epsilon"], episodes, timesteps)
+        alpha_results[f'reward:{alpha}'] = ep_train_rewards
+        alpha_results[f'steps:{alpha}'] = ep_steps
+
+    for gamma in run_config['gammas']:
+        ep_train_rewards, ep_steps = train_agent(run_config["alpha"], gamma, run_config["epsilon"], episodes, timesteps)
+        gamma_results[f'reward:{gamma}'] = ep_train_rewards
+        gamma_results[f'steps:{gamma}'] = ep_steps
+
+    for epsilon in run_config['epsilons']:
+        ep_train_rewards, ep_steps = train_agent(run_config["alpha"], run_config["gamma"], epsilon, episodes, timesteps)
+        epsilon_results[f'reward:{epsilon}'] = ep_train_rewards
+        epsilon_results[f'steps:{epsilon}'] = ep_steps
+
+    with open(os.path.join(os.getcwd(), 'results', "alpha_results.json"), 'w') as alpha_results_file:
+        json.dump(alpha_results, alpha_results_file)
+
+    with open(os.path.join(os.getcwd(), 'results', "gamma_results.json"), 'w') as gamma_results_file:
+        json.dump(gamma_results, gamma_results_file)
+
+    with open(os.path.join(os.getcwd(), 'results', "epsilon_results.json"), 'w') as epsilon_results_file:
+        json.dump(epsilon_results, epsilon_results_file)
+
+compare_params(run_config, episodes, timesteps)
