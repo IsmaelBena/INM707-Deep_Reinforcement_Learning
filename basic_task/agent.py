@@ -1,17 +1,6 @@
 import numpy as np
 import copy
 
-# posible actions
-# keep track of ores
-
-# diamond_ores_collected = [false, false, false]
-# if false in diamond_ores_collected:
-    # exit not open
-
-# np.where(dimaond_ores_collected == false)
-# if mine dont thing
-
-
 class Agent():
     def __init__(self, alpha, gamma, epsilon, decay, R, name):
         self.name = name
@@ -43,7 +32,7 @@ class Agent():
         else:
             self.action_taken = np.random.choice(best_actions)
             
-        self.epsilon -= self.decay
+        self.epsilon *= self.decay
         #print(f'action taken {self.action_taken}')
 
         reward = self.R[self.prime_state][self.current_state, self.action_taken]

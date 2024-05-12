@@ -6,6 +6,7 @@ import matplotlib.animation as animation
 import pickle
 import os
 import json
+from collections import deque
 
 from environment import Environment
 from agent import Agent
@@ -133,14 +134,6 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
         ep_rewards.append(agent.total_reward)
         ep_steps.append(timestep)
 
-        #print(f'Total reward: {agent.total_reward}')
-
-        #print(env.moved_off_mine)
-        
-        #print(f'Episode {episode} finished with Q value: \n{agent.Q.round(1)}')
-
-    # print(f'Final Q Matrix: \n {agent.Q.round(1)}')
-
     f = open('training_debug.txt', 'w')
 
     for state in enumerate(agent.Q.tolist()):
@@ -148,7 +141,7 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
 
     f.close()
 
-    plot_reward(agent.rewards, name)
+    # plot_reward(agent.rewards, name)
 
     with open(f'./agents/{name}/{name}-agent.pkl', 'wb') as file:
         pickle.dump(agent, file)
@@ -208,22 +201,21 @@ def test_agent(name):
 
     visualisePath(images, agent_rewards, name)
 
-    #plt.plot(agent.rewards)
-    #plt.show()
+    plt.plot(agent.rewards)
+    plt.show()
 
+# Base Model Hyperparameters
+# alpha = 0.8
+# gamma = 0.9
+# epsilon = 0.5
 
-alpha = 0.8
-gamma = 0.9
-epsilon = 0.5
-
-#     name = f'a{alpha}g{gamma}e{epsilon}'.replace('.', '')
-
+# Inference Model Hyperparameters
+alpha = 0.6
+gamma = 0.3
+epsilon = 0.3
 
 episodes = 1000
 timesteps = 1000
-
-# episodes = 50
-# timesteps = 1000
 
 run_config = {
     "alpha": 0.8,
@@ -233,16 +225,6 @@ run_config = {
     "gammas": [0.9, 0.6, 0.3],
     "epsilons": [0.9, 0.6, 0.3]
 }
-
-# run_config = {
-#     "alphas": [0.5, 0.2],
-#     "gammas": [0.8, 0.5],
-#     "epsilon_decays": [0.999, 0.91]
-# }
-
-# train_agent(alpha, gamma, epsilon, episodes, timesteps)
-# test_agent(f'a{alpha}g{gamma}e{epsilon}'.replace('.', ''))
-
 
 def compare_params(run_config, eps, ts):
     alpha_results = {}
@@ -273,4 +255,42 @@ def compare_params(run_config, eps, ts):
     with open(os.path.join(os.getcwd(), 'basic_task/results', "epsilon_results.json"), 'w') as epsilon_results_file:
         json.dump(epsilon_results, epsilon_results_file)
 
-compare_params(run_config, episodes, timesteps)
+# compare_params(run_config, episodes, timesteps)
+
+def plot_results(value, target, title):
+
+    plt.title(title)
+    plt.xlabel('episodes')
+    plt.ylabel(target)
+    colors = ['red', 'green', 'blue', 'olive', 'purple']
+    color_id = 0
+
+    window_size = 100
+    vals_window = deque([])
+    weighted_line = []
+    for ind, val in enumerate(value):
+        if ind < 100:
+            vals_window.append(val)
+            weighted_line.append(0)
+        elif ind >= len(value):
+            break
+        else:
+            vals_window.popleft()
+            vals_window.append(val)
+            weighted_line.append(sum(vals_window)/window_size)
+
+    plt.plot(value)
+    plt.plot(weighted_line, label=f'Average', color=colors[color_id])
+    color_id += 1
+    plt.legend()
+    plt.show()
+
+# ep_train_rewards, ep_steps = train_agent(alpha, gamma, epsilon, episodes, timesteps)
+
+test_agent('a06g03e03')
+
+# print(f'{ep_train_rewards}, \n{len(ep_train_rewards)}')
+# print(f'{ep_steps}, \n{len(ep_steps)}')
+
+# plot_results(ep_train_rewards, "reward", "Training Rewards")
+# plot_results(ep_steps, "steps", "Training Steps")

@@ -8,7 +8,7 @@ def plot_results(results_target_file, target, title):
         data = json.load(file)
     plt.title(title)
     plt.xlabel('episodes')
-    plt.ylabel('rewards')
+    plt.ylabel(target)
     colors = ['red', 'green', 'blue', 'olive', 'purple']
     color_id = 0
     for key in data:
@@ -26,7 +26,7 @@ def plot_results(results_target_file, target, title):
                     vals_window.append(val)
                     weighted_line.append(sum(vals_window)/window_size)
 
-            plt.plot(weighted_line, label=f'{key}', color=colors[color_id])
+            plt.plot(weighted_line, label=f'{key[-3:]}', color=colors[color_id])
             color_id += 1
     plt.legend()
     plt.show()
