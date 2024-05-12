@@ -13,10 +13,6 @@ class Environment():
             start_exit_pos, wall_rail_pos, diamond_ore_pos, corrosive_fumes_pos,
             rails_mapping_pos):
 
-        ####################### Debugging
-        #self.moved_off_mine = 0
-
-
         # env design params
         self.grid_x = grid_x
         self.grid_y = grid_y
@@ -28,6 +24,7 @@ class Environment():
         self.diamond_ore_pos = diamond_ore_pos
         self.corrosive_fumes_pos = corrosive_fumes_pos
         self.rails_mapping_pos = rails_mapping_pos
+
         # converted to states
         self.start_state = self.convert_pos_to_state(start_exit_pos)
         self.wall_rail_states = self.convert_pos_to_state(wall_rail_pos)
@@ -61,31 +58,6 @@ class Environment():
 
         self.R = copy.deepcopy(self.get_R_matrix())
 
-        """self.R =  np.empty((len(self.all_states),len(self.all_states),))
-        self.R[:] = np.nan
-
-        self.R = self.add_rewards(self.generate_init_r_matrix(self.R))"""
-        #self.R_cache = copy.deepcopy(self.R)
-
-        """f = open('debug.txt', 'w')
-
-        for index, state in enumerate(self.R):
-            f.write(f'\nfrom state: {index}')
-
-            i = 0
-            while i < self.amount_of_grid_states:
-                f.write(f'\n{np.array2string(state[i:i + self.grid_x])}')
-                i+= self.grid_x
-                
-
-            f.write(f'{np.array2string(state[self.amount_of_grid_states: self.amount_of_grid_states + len(self.diamond_ore_states)])}')
-            f.write(f'{np.array2string(state[self.amount_of_grid_states + len(self.diamond_ore_states): self.amount_of_grid_states + len(self.diamond_ore_states) + 1 ])}\n')
-
-        f.close()"""
-
-        #print(self.R.shape)
-
-
     def convert_pos_to_state(self, pos_arr):
         res = []
         for pos in pos_arr:
@@ -106,9 +78,6 @@ class Environment():
     def generate_prime_state(self):
         
         prime_states = []
-
-        """for idx in range(len(self.R)):
-            prime_states.append([True for num in range(1, len(self.diamonds_collected) + 1)])"""
         
         prime_states = list(map(list, product([False, True], repeat = len(self.diamonds_collected))))
 
@@ -125,8 +94,6 @@ class Environment():
         R =  np.empty((len(self.all_states),len(self.all_states),))
         R[:] = np.nan
 
-        #R = self.add_rewards(self.generate_init_r_matrix(R))
-
         if len(self.diamond_ore_states) < 3:
 
             for index in range(0, len(self.diamond_ore_states) ** 2):
@@ -138,7 +105,6 @@ class Environment():
             for index in range(0, (len(self.diamond_ore_states) ** 2) - 1):
 
                 R = self.add_rewards(self.generate_init_r_matrix(R), index)
-
                 R_mult_dim.append(copy.deepcopy(R))
 
         
@@ -197,8 +163,6 @@ class Environment():
     def generate_init_r_matrix(self, nan_r):
         # 0 = up, 1 = right, 2 = down, 3 = left, 4 = mine
         for state in self.all_states:
-            """if state == self.amount_of_grid_states + len(self.diamond_ore_states):
-                continue"""
             if (state not in self.wall_rail_states):
                 if state not in self.rail_starts:
                     for action in self.all_actions:
@@ -254,41 +218,25 @@ class Environment():
     def add_rewards(self, init_r_matrix, prime_state):
         for index, diamond_ore_state in enumerate(self.diamond_ore_states):
             
-            #print(self.prime_states[prime_state][index])
             if self.prime_states[prime_state][index] == self.diamonds_collected[index] and not self.diamonds_collected[index]:
                 
                 init_r_matrix[self.amount_of_grid_states+index][diamond_ore_state] = self.diamond_collected_reward
 
-        #print(init_r_matrix[self.amount_of_grid_states+index][diamond_ore_state])
-
         for starting_state, reward in enumerate(init_r_matrix):
-            #print(np.where(~np.isnan(init_r_matrix[starting_state]))[0])
             valid_actions = np.where(~np.isnan(init_r_matrix[starting_state]))[0]
             for valid_action in valid_actions:
-                #print(valid_action)
                 if valid_action in self.corrosive_fumes_states:
                     init_r_matrix[starting_state][valid_action] = self.corrosive_fume_reward
 
         if prime_state == len(self.prime_states) - 1:
 
-            #init_r_matrix[self.amount_of_grid_states + len(self.diamond_ore_states)][self.start_state] = self.exit_reward
-
-            """for state in range(self.amount_of_grid_states + len(self.diamond_ore_states)):
-                for idx in range(len(self.diamond_ore_states)):
-                    init_r_matrix[state][self.amount_of_grid_states + idx] = np.nan"""
-
             for starting_state, reward in enumerate(init_r_matrix):
-                #print(np.where(~np.isnan(init_r_matrix[starting_state]))[0])
 
                 valid_actions = np.where(~np.isnan(init_r_matrix[starting_state]))[0]
                 for valid_action in valid_actions:
                     if valid_action == self.start_state and starting_state != self.start_state:
                         init_r_matrix[starting_state][-1] = 0
                         init_r_matrix[self.amount_of_grid_states + len(self.diamond_ore_states)][valid_action] = self.exit_reward
-                        #init_r_matrix[starting_state][valid_action] = self.exit_reward
-        
-        """if prime_state == len(self.prime_states) - 1:
-            init_r_matrix[self.convert_state_to_pos(self.start_state)[1]][self.convert_state_to_pos(self.start_state)[0]] = self.exit_reward"""
 
         for starting_state, reward in enumerate(init_r_matrix):
             valid_actions = np.where(~np.isnan(init_r_matrix[starting_state]))[0]
@@ -300,42 +248,28 @@ class Environment():
         return init_r_matrix
 
     def get_valid_actions(self, current_state):
-        #print(f'curr state {current_state}')
-        #print(f'np where {np.where(~np.isnan(self.R[current_state]))}')
         
         prime_state = self.prime_states.index(self.diamonds_collected)
 
         valid_actions = np.where(~np.isnan(self.R[prime_state][current_state]))[0]
-        #print(f'valid actions {valid_actions}')
         
         for index, diamond_ore in enumerate(self.diamond_ore_states):
             if diamond_ore in valid_actions:
 
-                #print(f'diamond ore {index} at {diamond_ore} status: {self.diamonds_collected[index]}')
-
                 if self.diamonds_collected[index]:
-
-                    #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {self.amount_of_grid_states + index}')
                     
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states + index))
-                    
-                    #print(f'After removing: {valid_actions}')
 
                 elif current_state > self.amount_of_grid_states-1 and current_state < self.amount_of_grid_states + len(self.diamond_ore_states):
                     
                     continue
-                else:
 
-                    #print(f'currently at: {current_state}\nActions: {valid_actions}\nRemoving: {diamond_ore}')
+                else:
                     valid_actions = np.delete(valid_actions, np.where(valid_actions == diamond_ore))
-                    #print(f'After removing: {valid_actions}')
 
         if self.start_state in valid_actions:
-            #print(f'Current State: {current_state}')
             if False in self.diamonds_collected:
                 valid_actions = np.delete(valid_actions, np.where(valid_actions == self.amount_of_grid_states+len(self.diamond_ore_pos)))
-            """else:
-                valid_actions = np.delete(valid_actions, np.where(valid_actions == self.start_state))"""
 
         return valid_actions
 
@@ -345,42 +279,7 @@ class Environment():
             
             self.diamonds_collected[self.diamond_ore_states.index(agent_current_state)] = True
 
-            #self.diamond_ore_states.remove(self.diamond_ore_states[self.diamond_ore_states.index(agent_current_state)])
-            #print(self.diamond_ore_states)
-
-            #print(self.R[:][self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)])
-
-            """for state in range(self.amount_of_grid_states):
-                self.R[state][self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)] = np.nan"""
-
-            #self.diamond_ore_states[self.diamond_ore_states.index(agent_current_state)] = np.nan
-                
-            #np.delete(self.diamond_ore_states, self.diamond_ore_states.index(agent_current_state))
-
-            #print("OLD: ", self.R[agent_prev_state][agent_current_state])
-            """self.R[agent_current_state + 1][agent_current_state] = -25"""
-
-            #print("NEW: ", self.R[agent_prev_state][agent_current_state])
-
-            #self.R[1][self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)] = np.nan
-
-            #print(self.R[self.amount_of_grid_states + self.diamond_ore_states.index(agent_current_state)][agent_current_state])
-
-        #    print(f'Diamonds mined: {self.diamonds_collected}')
-        #     print('Diamond Mined')
-        # elif agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45:
-        #     print('empty ore deposit?')
-        # elif agent_prev_state == 64 or agent_prev_state == 65 or agent_prev_state == 66:
-        #     self.moved_off_mine += 1
-
-        #if (agent_current_state == 0 or agent_current_state == 40 or agent_current_state == 45) and (agent_prev_state == 64 or agent_prev_state == 65 or agent_prev_state == 66):
-            #print('mining not check properly')
-
     def check_terminal(self, current_state, prev_state):
-        """if state == self.amount_of_grid_states + len(self.diamond_ore_states):
-            return True
-        else:
-            return False"""
         
         if self.get_prime_state() == len(self.prime_states) -1 and current_state == self.start_state and prev_state == self.amount_of_grid_states + len(self.diamond_ore_states):
             
@@ -394,27 +293,12 @@ class Environment():
         self.diamonds_collected = [False, False, False]
         self.diamond_ore_states = self.convert_pos_to_state(self.diamond_ore_pos)
 
-        #self.R = copy.deepcopy(self.get_R_matrix())
-
-        #self.R = copy.deepcopy(self.R_cache.copy)
-        #self.R = self.add_rewards(self.R)
-
-
-
     def get_grid(self, agent_state):
         empty_grid = np.zeros((self.grid_x, self.grid_y))
-        #print(empty_grid)
-
-        #print(agent_pos)
-
-        #agent_state = self.convert_pos_to_state([agent_pos])
 
         agent_pos = self.convert_state_to_pos(agent_state)
 
-        #print(f'Agent Pos: {agent_pos} \tAgent State: {agent_state}')
-
         if agent_state > self.amount_of_grid_states - 1:
-            #print(f'Agent State: {agent_state}')
 
             if agent_state < self.amount_of_grid_states + len(self.diamond_ore_states):
                 agent_pos = self.convert_state_to_pos(self.diamond_ore_states[agent_state - self.amount_of_grid_states])
@@ -425,8 +309,6 @@ class Environment():
                 agent_pos[1] = self.start_exit_pos[0][0]
 
                 empty_grid[agent_pos[0], agent_pos[1]] += 0
-                
-                #print(f'Agent Pos: {agent_pos}')
 
         if False not in self.prime_states[self.get_prime_state()] and agent_state == self.start_state:
 
@@ -456,8 +338,6 @@ class Environment():
         
         empty_grid[agent_pos[0], agent_pos[1]] += 1000
 
-        #print(empty_grid)
-
         return empty_grid
     
     def generate_R_matrix(self):
@@ -477,7 +357,6 @@ class Environment():
                     f.write(f'\n{np.array2string(s[i:i + self.grid_x])}')
                     i+= self.grid_x
                     
-
                 f.write(f'{np.array2string(s[self.amount_of_grid_states: self.amount_of_grid_states + len(self.diamond_ore_states)])}')
                 f.write(f'{np.array2string(s[self.amount_of_grid_states + len(self.diamond_ore_states): self.amount_of_grid_states + len(self.diamond_ore_states) + 1 ])}\n')
 

@@ -56,8 +56,6 @@ class DQN(nn.Module):
         self.layer2 = nn.Linear(128, 128)
         self.layer3 = nn.Linear(128, n_actions)
 
-    # Called with either one element to determine next action, or a batch
-    # during optimization. Returns tensor([[left0exp,right0exp]...]).
     def forward(self, x):
         x = F.relu(self.layer1(x))
         x = F.relu(self.layer2(x))
@@ -99,8 +97,6 @@ class DQN_Agent():
         q_values = self.evaluate_actions(states, actions, rewards, dones, gamma)
         return q_values
 
-
-
 class Trainer():
     def __init__(self, agent, env, batch_size, gamma, eps_start, eps_end, eps_decay, tau, lr, optimizer, plot_results=True, seed=False, save_agent=True):
 
@@ -122,8 +118,6 @@ class Trainer():
         self.steps_done = 0
 
         self.episode_durations = []
-
-    ## Remember to update steps after each action
 
     def epsilon_policy(self, state):
         self.epsilon = self.EPS_END + (self.EPS_START - self.EPS_END) * math.exp(-1. * self.steps_done / self.EPS_DECAY)
@@ -151,17 +145,15 @@ class Trainer():
         next_state_values = torch.zeros(self.BATCH_SIZE, device=device)
         with torch.no_grad():
             next_state_values[non_final_mask] = self.agent.target_network(non_final_next_states).max(1).values
-        # Compute the expected Q values
+
         expected_state_action_values = (next_state_values * self.GAMMA) + reward_batch
 
-        # Compute Huber loss
         criterion = nn.SmoothL1Loss()
         loss = criterion(state_action_values, expected_state_action_values.unsqueeze(1))
 
-        # Optimize the model
         self.optimizer.zero_grad()
         loss.backward()
-        # In-place gradient clipping
+
         torch.nn.utils.clip_grad_value_(self.agent.online_network.parameters(), 100)
         self.optimizer.step()
 
@@ -176,13 +168,13 @@ class Trainer():
         plt.xlabel('Episode')
         plt.ylabel('Duration')
         plt.plot(durations_t.numpy())
-        # Take 100 episode averages and plot them too
+        
         if len(durations_t) >= 100:
             means = durations_t.unfold(0, 100, 1).mean(1).view(-1)
             means = torch.cat((torch.zeros(99), means))
             plt.plot(means.numpy())
 
-        plt.pause(0.001)  # pause a bit so that plots are updated
+        plt.pause(0.001)
         is_ipython = 'inline' in matplotlib.get_backend()
         if is_ipython:
             if training:
@@ -202,7 +194,7 @@ class Trainer():
         plt.ion()
         for i_episode in range(num_episodes):
             print(f'Episode: {i_episode}/{num_episodes}')
-            # Initialize the environment and get its state
+            
             state, info = self.env.reset()
             state = torch.tensor(state, dtype=torch.float32, device=device).unsqueeze(0)
             for t in count():
@@ -216,17 +208,12 @@ class Trainer():
                 else:
                     next_state = torch.tensor(observation, dtype=torch.float32, device=device).unsqueeze(0)
 
-                # Store the transition in memory
                 self.agent.memory.push(state, action, next_state, reward)
 
-                # Move to the next state
                 state = next_state
 
-                # Perform one step of the optimization (on the policy network)
                 self.optimize_models()
 
-                # Soft update of the target network's weights
-                # θ′ ← τ θ + (1 −τ )θ′
                 target_net_state_dict = self.agent.target_network.state_dict()
                 online_net_state_dict = self.agent.online_network.state_dict()
                 for key in online_net_state_dict:
@@ -288,14 +275,12 @@ LR = 1e-4
 
 REPLAY_MEMORY = 10000
 
-
 env = env = gym.make("LunarLander-v2",
     continuous = False,
     gravity= -10.0,
     enable_wind= False,
     wind_power = 0.0,
-    turbulence_power = 1.5,
-    render_mode= "human"
+    turbulence_power = 1.5
 )
 
 state, info = env.reset()
@@ -303,14 +288,14 @@ state, info = env.reset()
 n_observations = len(state)
 n_actions = env.action_space.n
 
-# agent = DQN_Agent("double_dqn_agent_1kep", n_observations, n_actions, True, 10000, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR)
+agent = DQN_Agent("Target_dqn_agent_1kep", n_observations, n_actions, False, 10000, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR)
 
-agent = load_agent(os.path.join('advanced_task/checkpoints', 'double_dqn_agent_1kep'))
+# agent = load_agent(os.path.join('advanced_task/checkpoints', 'target_dqn_agent_1kep'))
 
 optimizer = optim.AdamW(agent.online_network.parameters(), lr=LR, amsgrad=True)
 
-# trainer = Trainer(agent, env, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR, optimizer, plot_results=True, seed=False)
-# trainer.train(num_episodes = 1000)
+trainer = Trainer(agent, env, BATCH_SIZE, GAMMA, EPS_START, EPS_END, EPS_DECAY, TAU, LR, optimizer, plot_results=True, seed=False)
+trainer.train(num_episodes = 1000)
 
-tester = Tester(agent, env)
-tester.test()
+# tester = Tester(agent, env)
+# tester.test()

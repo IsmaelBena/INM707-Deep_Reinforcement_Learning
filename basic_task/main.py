@@ -22,18 +22,8 @@ diamond_ore_pos = [[0, 0], [0, 5], [5, 5]]
 corrosive_fumes_pos = [[1, 2], [6, 5], [0, 7]]
 rails_mapping_pos = [[[6, 1], [3, 0]], [[4, 0], [6, 2]], [[2, 7], [1, 5]], [[1, 6], [3, 7]]]
 
-# alpha = 0.8
-# gamma = 0.9
-# epsilon = 0.5
-
 env = Environment(grid_x, grid_y, diamond_collected_reward, corrosive_fume_reward, exit_reward, start_exit_pos, wall_rail_pos, diamond_ore_pos, corrosive_fumes_pos, rails_mapping_pos)
 env.generate_R_matrix()
-
-# agent = Agent(alpha, gamma, epsilon, env.R)
-
-# images = []
-# frames = []
-# agent_rewards = []
 
 ########################## Visualisation
 # Black = Agent                       1000
@@ -46,23 +36,6 @@ env.generate_R_matrix()
 # Orange = Mining                     1100
 # Green = Success                     1200
 
-# def plotState(grid):
-#     bounds = [-31, -6, -1, 1, 6, 51, 101, 1001, 1101, 1201]
-#     cmap = mpl.colors.ListedColormap(['purple','brown','white', 'red', 'blue', 'yellow', 'black', 'orange', 'green'])
-#     norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-
-#     img = plt.imshow(grid, interpolation='nearest', cmap = cmap,norm=norm, animated = True)
-
-#     images.append(grid)
-#     # make a color bar
-#     #pyplot.colorbar(img,cmap=cmap, norm=norm, boundaries=bounds,ticks=[-5,0,5])
-#     #pyplot.show()
-
-#     #images.append([img])
-#     #np.append(images, img)
-
-#     #pyplot.show()
-
 def visualisePath(images, agent_rewards, name):
     
     print(f'Generating Path... {len(images)} frames')
@@ -74,9 +47,6 @@ def visualisePath(images, agent_rewards, name):
     cmap = mpl.colors.ListedColormap(['purple','brown','white', 'red', 'blue', 'yellow', 'black', 'orange', 'green'])
     norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
 
-    #img = pyplot.imshow(grid, interpolation='nearest', cmap = cmap,norm=norm, animated = True)
-    #reward = agent.total_reward
-
     for idx, img in enumerate(images):
         
         frames.append([plt.imshow(img, interpolation='nearest', cmap = cmap,norm=norm, animated = True), plt.annotate(f'Step: {idx}, R: {agent_rewards[idx - 1]}', (0, 0))])
@@ -84,8 +54,6 @@ def visualisePath(images, agent_rewards, name):
     
     ani = animation.ArtistAnimation(fig, frames)
     ani.save(f'./agents/{name}/path.mp4')
-
-    #pyplot.show()
 
 def plot_reward(rewards, name):
 
@@ -122,8 +90,6 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
             agent.set_position(env.convert_state_to_pos(agent.current_state))
             env.check_diamond_mined(agent.current_state, agent.prev_state)
 
-            #agent.update_env(env.R)
-
             if env.check_terminal(agent.current_state, agent.prev_state):
                 agent.update_q()
                 print(f'{name} - Terminal Reached {timestep}')
@@ -140,8 +106,6 @@ def train_agent(alpha, gamma, epsilon, episodes, timesteps):
         f.write(f'\n{state}\n')
 
     f.close()
-
-    # plot_reward(agent.rewards, name)
 
     with open(f'./agents/{name}/{name}-agent.pkl', 'wb') as file:
         pickle.dump(agent, file)
@@ -165,10 +129,8 @@ def test_agent(name):
     steps = 0
 
     images.append(env.get_grid(agent.position))
-    #plotState(env.get_grid(agent.position))
 
     while True:
-        #print(env.get_valid_actions(agent.current_state))
 
         agent.epsilon_test(env.get_valid_actions(agent.current_state))
 
@@ -177,18 +139,11 @@ def test_agent(name):
         agent.set_prime_state(env.get_prime_state())
         agent.set_position(agent.current_state)
 
-        #print(env.get_prime_state())
-
         env.check_diamond_mined(agent.current_state, agent.prev_state)
 
         steps += 1
 
         images.append(env.get_grid(agent.position))
-        #plotState(env.get_grid(agent.position))
-
-        #agent.update_env(env.R)
-        
-        #print(agent.current_state)
 
         if env.check_terminal(agent.current_state, agent.prev_state):
             print(f"{name} - Terminal Reached: {steps} steps")
@@ -196,8 +151,6 @@ def test_agent(name):
             break
 
     print(f'{name} - Total reward: {agent.total_reward}')
-
-    #env.generate_R_matrix()
 
     visualisePath(images, agent_rewards, name)
 
